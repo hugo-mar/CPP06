@@ -6,7 +6,7 @@
 /*   By: hugo-mar <hugo-mar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:48:04 by hugo-mar          #+#    #+#             */
-/*   Updated: 2025/08/05 22:41:48 by hugo-mar         ###   ########.fr       */
+/*   Updated: 2025/08/07 22:14:49 by hugo-mar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int main() {
 
 	Data original;
+	
 	original.name = "Hugo";
 	original.age = 45;
 	original.hobby = "Coding";
