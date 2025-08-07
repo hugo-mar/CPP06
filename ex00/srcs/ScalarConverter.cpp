@@ -6,7 +6,7 @@
 /*   By: hugo-mar <hugo-mar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 17:49:17 by hugo-mar          #+#    #+#             */
-/*   Updated: 2025/08/05 01:00:38 by hugo-mar         ###   ########.fr       */
+/*   Updated: 2025/08/07 13:40:44 by hugo-mar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ ScalarConverter::~ScalarConverter() {
 	
 }
 
-bool	ScalarConverter::isCharLiteral(const std::string& literal) {
+bool	ScalarConverter::_isCharLiteral(const std::string& literal) {
 	
 	return literal.size() == 1 && !std::isdigit(literal[0]);
 }
 
-bool	ScalarConverter::isIntLiteral(const std::string& literal) {
+bool	ScalarConverter::_isIntLiteral(const std::string& literal) {
 	
 	errno = 0;
 	char* end = NULL;
@@ -52,7 +52,7 @@ bool	ScalarConverter::isIntLiteral(const std::string& literal) {
 	return val >= std::numeric_limits<int>::min() && val <= std::numeric_limits<int>::max();
 }
 
-bool	ScalarConverter::isFloatLiteral(const std::string& literal) {
+bool	ScalarConverter::_isFloatLiteral(const std::string& literal) {
 
 	if (literal == "inff" || literal == "-inff" || literal == "+inff" || literal == "nanf")
 		return true;
@@ -67,7 +67,7 @@ bool	ScalarConverter::isFloatLiteral(const std::string& literal) {
 	return *end == 'f' && *(end + 1) == '\0' && errno != ERANGE;
 }
 
-bool	ScalarConverter::isDoubleLiteral(const std::string& literal) {
+bool	ScalarConverter::_isDoubleLiteral(const std::string& literal) {
 
 	if (literal == "inf" || literal == "-inf" || literal == "+inf" || literal == "nan")
 		return true;
@@ -191,13 +191,13 @@ static void	printImpossible() {
 
 void	ScalarConverter::convert(const std::string& literal) {
 	
-	if (isCharLiteral(literal))
+	if (_isCharLiteral(literal))
 		return printCharConversion(literal[0]);
-	if (isIntLiteral(literal)) 
+	if (_isIntLiteral(literal)) 
 		return printIntConversion(std::atoi(literal.c_str()));
-	if (isFloatLiteral(literal))
+	if (_isFloatLiteral(literal))
 		return printFloatConversion(getFloatFromString(literal));
-	if (isDoubleLiteral(literal))
+	if (_isDoubleLiteral(literal))
 		return printDoubleConversion(getDoubleFromString(literal));
 	printImpossible();
 }
